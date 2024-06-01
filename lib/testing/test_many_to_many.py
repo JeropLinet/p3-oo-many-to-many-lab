@@ -30,7 +30,7 @@ def test_contract_validates_author():
     date = '01/01/2001'
     royalties = 40000
 
-    with pytest.raises(Exception):
+    with pytest.raises(ValueError):
         Contract("Author", book, date, royalties)
 
 def test_contract_validates_book():
@@ -39,7 +39,7 @@ def test_contract_validates_book():
     date = '01/01/2001'
     royalties = 40000
 
-    with pytest.raises(Exception):
+    with pytest.raises(ValueError):
         Contract(author, "Book", date, royalties)
 
 def test_contract_validates_date():
@@ -48,7 +48,7 @@ def test_contract_validates_date():
     book = Book("Title")
     royalties = 40000
 
-    with pytest.raises(Exception):
+    with pytest.raises(ValueError):
         Contract(author, book, 1012001, royalties)
 
 def test_contract_validates_royalties():
@@ -57,7 +57,7 @@ def test_contract_validates_royalties():
     book = Book("Title")
     date = '01/01/2001'
 
-    with pytest.raises(Exception):
+    with pytest.raises(ValueError):
         Contract(author, book, date, "Royalties")
 
 def test_author_has_contracts():
@@ -120,7 +120,7 @@ def test_author_has_total_royalties():
 
 def test_contract_contracts_by_date():
     """Test Contract class has method contracts_by_date() that sorts all contracts by date"""
-    Contract.all = []
+    Contract.all_contracts = []  # Ensure the all_contracts list is empty
     author1 = Author("Name 1")
     book1 = Book("Title 1")
     book2 = Book("Title 2")
